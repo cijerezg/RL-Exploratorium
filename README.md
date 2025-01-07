@@ -22,7 +22,7 @@ git clone https://github.com/yourusername/RL-Exploratorium.git
 cd RL-Exploratorium
 ```
 
-## Contributing
+## Contributing test
 
 Contributions are welcome! Please read the [contributing guidelines](CONTRIBUTING.md) before submitting a pull request.
 
