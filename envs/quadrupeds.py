@@ -1,6 +1,8 @@
 import mujoco
+import mujoco.msh2obj_test
 import mujoco.viewer
 import numpy as np
+import pdb
 
 class UnitreeQuadruped:
     def __init__(self, model):
@@ -8,21 +10,19 @@ class UnitreeQuadruped:
         self.data = mujoco.MjData(self.model)
         self.renderer = mujoco.Renderer(self.model)
 
-        mujoco.mj_resetData(self.model, self.data)
-
         # Initialize the state of the quadruped
-        self.state = None
         self.reset()
 
     def reset(self):
         # Reset the state of the quadruped
         mujoco.mj_resetData(self.model, self.data)
-        self.state = np.zeros(12)  # Example state with 12 dimensions
-        return self.state
+
 
     def step(self, action):
         # Apply the action to the quadruped and update the state
-        # This is a placeholder for the actual physics simulation
+        mujoco.mj_step(self.model, self.data)
+        pdb.set_trace()
+        
         self.state += action  # Simplified state update
         reward = self._compute_reward()
         done = self._check_done()
@@ -38,3 +38,9 @@ class UnitreeQuadruped:
         # Check if the episode is done
         done = np.linalg.norm(self.state) > 10  # Example condition
         return done
+    
+
+
+env = UnitreeQuadruped('mujoco_menagerie/unitree_go1/scene.xml')
+
+env.step(None)
